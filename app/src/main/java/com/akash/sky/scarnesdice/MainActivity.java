@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         turn=(TextView) findViewById(R.id.turn);
     }
 
-    public void rollDice(View view){
+    public void rollDice(View view){            //method for rolling of dice
         userTurn();
 
     }
@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
                 hold.setEnabled(true);
 
     }
-    public void userTurn(){
+    public void userTurn(){                                    //the real user rolling will occur
         hold.setEnabled(true);
         userScore=0;
-        Integer ren = random.nextInt(7);
+        Integer ren = random.nextInt(7);                  //randomly generates values
         turn.setText("player turn");
         switch (ren) {
             case 1:
@@ -90,16 +90,16 @@ public class MainActivity extends AppCompatActivity {
                 yourscore.setText("Your Score : "+overUserScore);
                 break;
         }
-        checkWin();
+        checkWin();                                                    //checks if the user win
 
     }
 
-    public void computerTurn(){
+    public void computerTurn(){                                     //computer turn will occour
         hold.setEnabled(false);
         roll.setEnabled(false);
         turn.setText("computer turn");
         Integer ren=0;
-        Integer chance=random.nextInt(5);
+        Integer chance=random.nextInt(6);                         //randomly generates values between 1-5
         int i=0;
         while(i<chance && ren!=1) {
             ren = random.nextInt(7);
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         roll.setEnabled(true);
     }
 
-    public void holdDice(View view){
+    public void holdDice(View view){                                //passes the chance
         userScore=0;
         computerTurn();
         turn.setText("player turn");
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void checkWin(){
+    public void checkWin(){                                 //win checker
         if(overUserScore>100&& overCompScore<100){
              turn.setText("You win");
              roll.setEnabled(false);
