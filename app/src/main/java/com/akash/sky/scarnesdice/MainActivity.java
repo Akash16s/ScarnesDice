@@ -30,12 +30,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void rollDice(View view){
-        Integer ren = random.nextInt(6);
+        Integer ren = random.nextInt(7);
             switch (ren) {
                 case 1:
                     diceImg.setImageResource(R.drawable.dice1);
                     overUserScore=overUserScore-userScore;
                     yourscore.setText("Your Score : "+overUserScore);
+                    userScore=0;
                     computerTurn();
                     break;
                 case 2:
@@ -76,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void computerTurn(){
-        Handler h2 = new Handler();
         hold.setEnabled(false);
         roll.setEnabled(false);
         Integer ren=0;
@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     diceImg.setImageResource(R.drawable.dice1);
                     overCompScore = overCompScore - compScore;
                     compscore.setText("Computer Score : " + overCompScore);
+                    compScore=0;
                     break;
                 case 2:
                     diceImg.setImageResource(R.drawable.dice2);
@@ -106,25 +107,22 @@ public class MainActivity extends AppCompatActivity {
                     diceImg.setImageResource(R.drawable.dice4);
                     compScore = compScore + 4;
                     overCompScore = overCompScore + 4;
-                    yourscore.setText("Computer Score : " + overCompScore);
+                    compscore.setText("Computer Score : " + overCompScore);
                     break;
                 case 5:
                     diceImg.setImageResource(R.drawable.dice5);
                     compScore = compScore + 5;
                     overCompScore = overCompScore + 5;
-                    yourscore.setText("Computer Score : " + overCompScore);
+                    compscore.setText("Computer Score : " + overCompScore);
                     break;
                 case 6:
                     diceImg.setImageResource(R.drawable.dice6);
                     compScore = compScore + 6;
                     overCompScore = overCompScore + userScore;
-                    yourscore.setText("Computer Score : " + overCompScore);
+                    compscore.setText("Computer Score : " + overCompScore);
                     break;
             }
             i++;
-
-            h2.postDelayed((Runnable) this,500);
-
         }
         hold.setEnabled(true);
         roll.setEnabled(true);
