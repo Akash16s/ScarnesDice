@@ -59,7 +59,7 @@
         android:layout_alignBaseline="@+id/Roll"
         android:layout_alignBottom="@+id/Roll"
         android:layout_centerHorizontal="true"
-        android:text="Hold"
+        android:text="pass"
         android:onClick="holdDice"
         android:id="@+id/Hold" />
 
@@ -74,5 +74,15 @@
         android:layout_toRightOf="@+id/Dice"
         android:id="@+id/reset"
         />
+
+    <TextView
+        android:id="@+id/turn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Hold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:textSize="40dp"
+        android:text="player turn" />
 
 </RelativeLayout>

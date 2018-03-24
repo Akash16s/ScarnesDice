@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     Button roll,hold,reset;
-    TextView yourscore,compscore;
+    TextView yourscore,compscore,turn;
     ImageView diceImg;
     int overUserScore=0,userScore=0,overCompScore=0,compScore=0;
     private Random random = new Random();
@@ -27,58 +27,77 @@ public class MainActivity extends AppCompatActivity {
         yourscore=(TextView) findViewById(R.id.yourscore);
         compscore=(TextView) findViewById(R.id.compscore);
         diceImg=(ImageView) findViewById(R.id.Dice);
+        turn=(TextView) findViewById(R.id.turn);
     }
 
     public void rollDice(View view){
-        Integer ren = random.nextInt(7);
-            switch (ren) {
-                case 1:
-                    diceImg.setImageResource(R.drawable.dice1);
-                    overUserScore=overUserScore-userScore;
-                    yourscore.setText("Your Score : "+overUserScore);
-                    userScore=0;
-                    computerTurn();
-                    break;
-                case 2:
-                    diceImg.setImageResource(R.drawable.dice2);
-                    userScore = userScore + 2;
-                    overUserScore=overUserScore+2;
-                    yourscore.setText("Your Score : "+overUserScore);
-                    break;
-                case 3:
-                    diceImg.setImageResource(R.drawable.dice3);
-                    userScore = userScore + 3;
-                    overUserScore=overUserScore+3;
-                    yourscore.setText("Your Score : "+overUserScore);
-                    break;
-                case 4:
-                    diceImg.setImageResource(R.drawable.dice4);
-                    userScore = userScore + 4;
-                    overUserScore=overUserScore+4;
-                    yourscore.setText("Your Score : "+overUserScore);
-                    break;
-                case 5:
-                    diceImg.setImageResource(R.drawable.dice5);
-                    userScore = userScore + 5;
-                    overUserScore=overUserScore+5;
-                    yourscore.setText("Your Score : "+overUserScore);
-                    break;
-                case 6:
-                    diceImg.setImageResource(R.drawable.dice6);
-                    userScore = userScore + 6;
-                    overUserScore=overUserScore+userScore;
-                    yourscore.setText("Your Score : "+overUserScore);
-                    break;
-
-            }
-
+        userTurn();
 
     }
+    public void resetDice(View view){
+                overUserScore=0;
+                userScore=0;
+                overCompScore=0;
+                compScore=0;
+                yourscore.setText("Your Score : 0");
+                compscore.setText("Computer Score : 0");
+                turn.setText("player turn");
+                roll.setEnabled(true);
+                hold.setEnabled(true);
 
+    }
+    public void userTurn(){
+        hold.setEnabled(true);
+        userScore=0;
+        Integer ren = random.nextInt(7);
+        turn.setText("player turn");
+        switch (ren) {
+            case 1:
+                diceImg.setImageResource(R.drawable.dice1);
+                overUserScore=overUserScore-userScore;
+                yourscore.setText("Your Score : "+overUserScore);
+                userScore=0;
+                computerTurn();
+                break;
+            case 2:
+                diceImg.setImageResource(R.drawable.dice2);
+                userScore = userScore + 2;
+                overUserScore=overUserScore+2;
+                yourscore.setText("Your Score : "+overUserScore);
+                break;
+            case 3:
+                diceImg.setImageResource(R.drawable.dice3);
+                userScore = userScore + 3;
+                overUserScore=overUserScore+3;
+                yourscore.setText("Your Score : "+overUserScore);
+                break;
+            case 4:
+                diceImg.setImageResource(R.drawable.dice4);
+                userScore = userScore + 4;
+                overUserScore=overUserScore+4;
+                yourscore.setText("Your Score : "+overUserScore);
+                break;
+            case 5:
+                diceImg.setImageResource(R.drawable.dice5);
+                userScore = userScore + 5;
+                overUserScore=overUserScore+5;
+                yourscore.setText("Your Score : "+overUserScore);
+                break;
+            case 6:
+                diceImg.setImageResource(R.drawable.dice6);
+                userScore = userScore + 6;
+                overUserScore=overUserScore+6;
+                yourscore.setText("Your Score : "+overUserScore);
+                break;
+        }
+        checkWin();
+
+    }
 
     public void computerTurn(){
         hold.setEnabled(false);
         roll.setEnabled(false);
+        turn.setText("computer turn");
         Integer ren=0;
         Integer chance=random.nextInt(5);
         int i=0;
@@ -118,13 +137,39 @@ public class MainActivity extends AppCompatActivity {
                 case 6:
                     diceImg.setImageResource(R.drawable.dice6);
                     compScore = compScore + 6;
-                    overCompScore = overCompScore + userScore;
+                    overCompScore = overCompScore + 6;
                     compscore.setText("Computer Score : " + overCompScore);
                     break;
             }
             i++;
+            checkWin();
         }
+        compScore=0;
+        turn.setText("player turn");
         hold.setEnabled(true);
         roll.setEnabled(true);
+    }
+
+    public void holdDice(View view){
+        userScore=0;
+        computerTurn();
+        turn.setText("player turn");
+        hold.setEnabled(false);
+
+    }
+
+    public void checkWin(){
+        if(overUserScore>100&& overCompScore<100){
+             turn.setText("You win");
+             roll.setEnabled(false);
+             hold.setEnabled(false);
+        }
+        else{
+            if(overUserScore<100&&overCompScore>100){
+                turn.setText("Computer Win");
+                roll.setEnabled(false);
+                hold.setEnabled(false);
+            }
+        }
     }
 }
