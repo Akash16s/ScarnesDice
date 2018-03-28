@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     }
     public void userTurn(){                                    //the real user rolling will occur
         hold.setEnabled(true);
-        userScore=0;
         Integer ren = random.nextInt(7);                  //randomly generates values
         turn.setText("player turn");
         switch (ren) {
