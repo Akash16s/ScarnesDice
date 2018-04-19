@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         hold.setEnabled(true);
         Integer ren = random.nextInt(7);                  //randomly generates values
         turn.setText("player turn");
+        diceImg.animate().rotation(180f*ren).setDuration(500);
         switch (ren) {
             case 1:
                 diceImg.setImageResource(R.drawable.dice1);
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         int i=0;
         while(i<chance && ren!=1) {
             ren = random.nextInt(7);
+            diceImg.animate().rotation(180f*ren).setDuration(500);
             switch (ren) {
                 case 1:
                     diceImg.setImageResource(R.drawable.dice1);
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
             i++;
+
             checkWin();
         }
         compScore=0;
